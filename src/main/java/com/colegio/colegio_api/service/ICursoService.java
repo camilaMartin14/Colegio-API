@@ -19,7 +19,7 @@ public interface ICursoService {
                             Long nuevoId,
                             String nuevaMateria,
                             List <Alumno> nuevaListaAlumnos,
-                            Maestro nuevoMaestro);
+                            Maestro unMaestro);
 
     public void editCurso(Curso cur);
 }
