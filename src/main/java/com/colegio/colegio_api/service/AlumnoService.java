@@ -13,12 +13,14 @@ public class AlumnoService implements IAlumnoService{
     @Override
     public List<Alumno> getAlumno() {
         List <Alumno> listaAlumnos= aluRepo.findAll();
-        return listaAlumnos;    }
+        return listaAlumnos;    
+    }
 
     @Override
     public Alumno findAlumno(Long legajo) {
         Alumno alu = aluRepo.findById(legajo).orElse(null);
-        return alu;    }
+        return alu;    
+    }
 
     @Override
     public void saveAlumno(Alumno alu) {

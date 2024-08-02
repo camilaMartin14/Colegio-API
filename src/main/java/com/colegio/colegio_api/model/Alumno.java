@@ -3,9 +3,9 @@ package com.colegio.colegio_api.model;
 import lombok.Getter;
 import lombok.Setter;
 
+@Getter@Setter
 public class Alumno {
     
-    @Getter@Setter
     public long legajo;
     public String nombre;
     public String apellido;
@@ -24,30 +24,6 @@ public class Alumno {
         this.dni = dni;
         this.cuil = cuil;
         this.edad = edad;
-        this.genero = genero;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
-
-    public void setDni(int dni) {
-        this.dni = dni;
-    }
-
-    public void setCuil(int cuil) {
-        this.cuil = cuil;
-    }
-
-    public void setEdad(int edad) {
-        this.edad = edad;
-    }
-
-    public void setGenero(char genero) {
         this.genero = genero;
     }
     

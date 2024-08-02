@@ -3,9 +3,9 @@ package com.colegio.colegio_api.model;
 import lombok.Getter;
 import lombok.Setter;
 
+@Getter@Setter
 public class Maestro {
     
-    @Getter@Setter
     public long legajo;
     public String nombre;
     public String apellido;

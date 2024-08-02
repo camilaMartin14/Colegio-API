@@ -4,9 +4,9 @@ import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 
+@Getter @Setter
 public class Curso {
     
-    @Getter @Setter
     public long id;
     public String materia;
     public List <Alumno> listaAlumnos;
