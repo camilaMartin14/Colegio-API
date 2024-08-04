@@ -38,13 +38,13 @@ public class MaestroController {
     }
 
     @PutMapping("/maestros/editar/{legajo_maestro}")
-    public Maestro editMaestro (@PathVariable Long legajo,
+    public Maestro editMaestro (@PathVariable Long legajoOriginal,
             @RequestParam(required = false, name= "legajo_maestro") Long nuevoLegajo,
             @RequestParam(required = false, name= "nombre") String nuevoNombre,
             @RequestParam(required = false, name= "apellido") String nuevoApellido,
             @RequestParam(required = false, name= "dni") int nuevoDni){
             
-        maeServ.editMaestro(legajo, 
+        maeServ.editMaestro(legajoOriginal, 
                             nuevoLegajo, 
                             nuevoNombre, 
                             nuevoApellido, 

@@ -1,58 +1,70 @@
 package com.colegio.colegio_api.controller;
 
+import com.colegio.colegio_api.model.Alumno;
+import com.colegio.colegio_api.service.IAlumnoService;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class AlumnoController {
      @Autowired
-    private IClienteService cliServ;
+    private IAlumnoService aluServ;
     
-    //listar
-    @GetMapping ("/clientes")
-    public List <Cliente> getClientes(){
-        return cliServ.getClientes();
+    @GetMapping ("/alumnos")
+    public List <Alumno> getAlumnos(){
+        return aluServ.getAlumno();
     }
     
-    //crear
-    @PostMapping ("/clientes/crear")
-    public String saveCliente (@RequestBody Cliente cli){
-        cliServ.saveCliente(cli);
+    @PostMapping ("/alumnos/crear")
+    public String saveAlumno(@RequestBody Alumno alu){
+        aluServ.saveAlumno(alu);
         
-        return "El cliente se creó correctamente";
+        return "El alumno se guardó correctamente";
     }
     
-    //eliminar
-    @DeleteMapping("/clientes/eliminar/{id_cliente}")
-    public String deleteCliente(@PathVariable Long id_cliente){
-        cliServ.deleteCliente(id_cliente);
+    @DeleteMapping("/alumnos/eliminar/{legajo_alumno}")
+    public String deleteAlumno(@PathVariable Long legajo){
+        aluServ.deleteAlumno(legajo);
         
-        return "El cliente se borró correctamente";
+        return "El alumno se borró correctamente";
     }
 
-    //modificar, pudiendo modificar el id original
-    @PutMapping("/clientes/editar/{id_cliente}")
-    public Cliente editCliente (@PathVariable Long id_cliente,
-            @RequestParam(required = false, name= "codigo_producto") Long nuevaId,
+    @PutMapping("/alumnos/editar/{legajo_alumno}")
+    public Alumno editAlumno (@PathVariable Long legajoOriginal,
+            @RequestParam(required = false, name= "legajo") Long nuevoLegajo,
             @RequestParam(required = false, name= "nombre") String nuevoNombre,
-            @RequestParam(required = false, name= "marca") String nuevoApellido,
-            @RequestParam(required = false, name= "precio") String nuevoDni){
+            @RequestParam(required = false, name= "apellido") String nuevoApellido,
+            @RequestParam(required = false, name= "dni") int nuevoDni,
+            @RequestParam(required = false, name= "cuil") int nuevoCuil,
+            @RequestParam(required = false, name= "edad") int nuevaEdad,
+            @RequestParam(required = false, name= "genero") char nuevoGenero){
             
-        cliServ.editCliente(id_cliente, 
-                            nuevaId, 
-                            nuevoNombre, 
-                            nuevoApellido, 
-                            nuevoDni);
+        aluServ.editAlumno(legajoOriginal,
+                            nuevoLegajo,
+                            nuevoNombre,
+                            nuevoApellido,
+                            nuevoDni,
+                            nuevoCuil,
+                            nuevaEdad,
+                            nuevoGenero);
         
-        Cliente cli = cliServ.findCliente(nuevaId);
+        Alumno alu = aluServ.findAlumno(nuevoLegajo);
         
-        return cli;
+        return alu;
     }
     
-    //modificar, considerando que el id original es intocable
-    @PutMapping("/clientes/editar")
-    public Cliente editCliente(@RequestBody Cliente cli){
-        cliServ.editCliente(cli);
+    @PutMapping("/alumnos/editar")
+    public Alumno editAlumno(@RequestBody Alumno alu){
+        aluServ.editAlumno(alu);
         
-        return cliServ.findCliente(cli.getId_cliente());
+        return aluServ.findAlumno(alu.getLegajo());
     }
 }
