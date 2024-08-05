@@ -1,58 +1,61 @@
 package com.colegio.colegio_api.controller;
 
+import com.colegio.colegio_api.model.Curso;
+import com.colegio.colegio_api.model.Maestro;
+import com.colegio.colegio_api.service.ICursoService;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class CursoController {
-     @Autowired
-    private IClienteService cliServ;
+    @Autowired
+    private ICursoService curServ;
     
-    //listar
-    @GetMapping ("/clientes")
-    public List <Cliente> getClientes(){
-        return cliServ.getClientes();
-    }
-    
-    //crear
-    @PostMapping ("/clientes/crear")
-    public String saveCliente (@RequestBody Cliente cli){
-        cliServ.saveCliente(cli);
-        
-        return "El cliente se creó correctamente";
-    }
-    
-    //eliminar
-    @DeleteMapping("/clientes/eliminar/{id_cliente}")
-    public String deleteCliente(@PathVariable Long id_cliente){
-        cliServ.deleteCliente(id_cliente);
-        
-        return "El cliente se borró correctamente";
+    @GetMapping ("/cursos")
+    public List <Curso> getCursos(){
+        return curServ.getCurso();
     }
 
-    //modificar, pudiendo modificar el id original
-    @PutMapping("/clientes/editar/{id_cliente}")
-    public Cliente editCliente (@PathVariable Long id_cliente,
-            @RequestParam(required = false, name= "codigo_producto") Long nuevaId,
-            @RequestParam(required = false, name= "nombre") String nuevoNombre,
-            @RequestParam(required = false, name= "marca") String nuevoApellido,
-            @RequestParam(required = false, name= "precio") String nuevoDni){
-            
-        cliServ.editCliente(id_cliente, 
-                            nuevaId, 
-                            nuevoNombre, 
-                            nuevoApellido, 
-                            nuevoDni);
+    @PostMapping ("/cursos/crear")
+    public String saveCurso (@RequestBody Curso cur){
+        curServ.saveCurso(cur);
         
-        Cliente cli = cliServ.findCliente(nuevaId);
-        
-        return cli;
+        return "El curso se creó correctamente";
     }
     
-    //modificar, considerando que el id original es intocable
-    @PutMapping("/clientes/editar")
-    public Cliente editCliente(@RequestBody Cliente cli){
-        cliServ.editCliente(cli);
+    @DeleteMapping("/cursos/eliminar/{id}")
+    public String deleteCurso(@PathVariable Long id){
+        curServ.deleteCurso(id);
         
-        return cliServ.findCliente(cli.getId_cliente());
+        return "El curso se borró correctamente";
+    }
+
+    @PutMapping("/cursos/editar/{id}")
+    public Curso editCurso (@PathVariable Long id,
+            @RequestParam(required = false, name= "id") Long nuevaId,
+            @RequestParam(required = false, name= "materia") String nuevaMateria,
+            @RequestParam(required = false, name= "alumnos") List nuevaListaAlumnos,
+            @RequestParam(required = false, name= "maestro") Maestro nuevoMaestro){
+            
+        curServ.editCurso(id, nuevaId, nuevaMateria, nuevaListaAlumnos, nuevoMaestro);
+        
+        Curso cur = curServ.findCurso(nuevaId);
+        
+        return cur;
+    }
+    
+    @PutMapping("/cursos/editar")
+    public Curso editCurso(@RequestBody Curso cur){
+        curServ.editCurso(cur);
+        
+        return curServ.findCurso(cur.getId());
     }
 }
