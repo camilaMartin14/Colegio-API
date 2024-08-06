@@ -26,11 +26,11 @@ public class AlumnoService implements IAlumnoService{
     
 
     @Override
-    public Alumno findAlumnoNombreApellido(String nombre, String apellido) {
+    public  Alumno findAlumnoNombreApellido(String nombre, String apellido) {
     for (Alumno alumno : listaAlumnos) {
             if (alumno.getNombre().equalsIgnoreCase(nombre) &&
                 alumno.getApellido().equalsIgnoreCase(apellido)) {
-                return alumno;
+            return aluRepo.findAlumnoNombreApellido(nombre, apellido).orElse(null);
             }
         }
         return null;

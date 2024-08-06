@@ -1,9 +1,11 @@
 package com.colegio.colegio_api.controller;
 
 import com.colegio.colegio_api.model.Alumno;
+import com.colegio.colegio_api.service.AlumnoService;
 import com.colegio.colegio_api.service.IAlumnoService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +24,25 @@ public class AlumnoController {
     public List <Alumno> getAlumnos(){
         return aluServ.getAlumno();
     }
+    
+    @GetMapping("/alumnos/{nombrecompleto}")
+    public ResponseEntity<Alumno> findAlumnoNombreApellido(@PathVariable String nombrecompleto) {
+        String[] partesNombre = nombrecompleto.split(" ", 2);
+        if (partesNombre.length < 2) {
+            return ResponseEntity.badRequest().body(null);
+        }
+
+        String nombre = partesNombre[0];
+        String apellido = partesNombre[1];
+        
+        Alumno alumno = alumnoService.findAlumnoNombreApellido(nombre, apellido);
+        if (alumno != null) {
+            return ResponseEntity.ok(alumno);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     
     @PostMapping ("/alumnos/crear")
     public String saveAlumno(@RequestBody Alumno alu){
