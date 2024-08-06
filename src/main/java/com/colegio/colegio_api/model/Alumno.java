@@ -17,14 +17,14 @@ public class Alumno {
     public String nombre;
     public String apellido;
     public int dni;
-    public int cuil;
+    public long cuil;
     public int edad;
     public char genero;
 
     public Alumno() {
     }
 
-    public Alumno(long legajo, String nombre, String apellido, int dni, int cuil, int edad, char genero) {
+    public Alumno(long legajo, String nombre, String apellido, int dni, long cuil, int edad, char genero) {
         this.legajo = legajo;
         this.nombre = nombre;
         this.apellido = apellido;

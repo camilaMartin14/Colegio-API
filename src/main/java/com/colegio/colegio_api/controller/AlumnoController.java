@@ -50,14 +50,14 @@ public class AlumnoController {
         return "El alumno se guardó correctamente";
     }
     
-    @DeleteMapping("/alumnos/eliminar/{legajo_alumno}")
+    @DeleteMapping("/alumnos/eliminar/{legajo}")
     public String deleteAlumno(@PathVariable Long legajo){
         aluServ.deleteAlumno(legajo);
         
         return "El alumno se borró correctamente";
     }
 
-    @PutMapping("/alumnos/editar/{legajo_alumno}")
+    @PutMapping("/alumnos/editar/{legajoOriginal}")
     public Alumno editAlumno (@PathVariable Long legajoOriginal,
             @RequestParam(required = false, name= "legajo") Long nuevoLegajo,
             @RequestParam(required = false, name= "nombre") String nuevoNombre,

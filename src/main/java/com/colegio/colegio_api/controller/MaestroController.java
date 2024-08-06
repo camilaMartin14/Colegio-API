@@ -30,14 +30,14 @@ public class MaestroController {
         return "El maestro se guardó correctamente";
     }
     
-    @DeleteMapping("/maestros/eliminar/{legajo_maestro}")
+    @DeleteMapping("/maestros/eliminar/{legajo}")
     public String deleteMaestro(@PathVariable Long legajo){
         maeServ.deleteMaestro(legajo);
         
         return "El maestro se borró correctamente";
     }
 
-    @PutMapping("/maestros/editar/{legajo_maestro}")
+    @PutMapping("/maestros/editar/{legajoOriginal}")
     public Maestro editMaestro (@PathVariable Long legajoOriginal,
             @RequestParam(required = false, name= "legajo_maestro") Long nuevoLegajo,
             @RequestParam(required = false, name= "nombre") String nuevoNombre,
