@@ -54,7 +54,7 @@ public class AlumnoService implements IAlumnoService{
                             String nuevoNombre, 
                             String nuevoApellido, 
                             int nuevoDni,
-                            int nuevoCuil, 
+                            long nuevoCuil, 
                             int nuevaEdad, 
                             char nuevoGenero) {
         

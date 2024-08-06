@@ -20,7 +20,7 @@ public interface IAlumnoService {
                             String nuevoNombre,
                             String nuevoApellido,
                             int nuevoDni,
-                            int nuevoCuil,
+                            long nuevoCuil,
                             int nuevaEdad,
                             char nuevoGenero);
 

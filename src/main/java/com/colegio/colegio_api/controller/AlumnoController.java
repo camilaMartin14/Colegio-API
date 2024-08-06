@@ -63,7 +63,7 @@ public class AlumnoController {
             @RequestParam(required = false, name= "nombre") String nuevoNombre,
             @RequestParam(required = false, name= "apellido") String nuevoApellido,
             @RequestParam(required = false, name= "dni") int nuevoDni,
-            @RequestParam(required = false, name= "cuil") int nuevoCuil,
+            @RequestParam(required = false, name= "cuil") long nuevoCuil,
             @RequestParam(required = false, name= "edad") int nuevaEdad,
             @RequestParam(required = false, name= "genero") char nuevoGenero){
             
