@@ -35,7 +35,7 @@ public class AlumnoController {
         String nombre = partesNombre[0];
         String apellido = partesNombre[1];
         
-        Alumno alumno = alumnoService.findAlumnoNombreApellido(nombre, apellido);
+        Alumno alumno = aluServ.findAlumnoNombreApellido(nombre, apellido);
         if (alumno != null) {
             return ResponseEntity.ok(alumno);
         } else {
