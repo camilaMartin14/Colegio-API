@@ -4,7 +4,9 @@ import com.colegio.colegio_api.model.Maestro;
 import com.colegio.colegio_api.repository.IMaestroRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class MaestroService implements IMaestroService{
 
     @Autowired

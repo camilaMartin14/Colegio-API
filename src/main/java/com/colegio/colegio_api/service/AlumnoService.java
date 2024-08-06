@@ -4,7 +4,9 @@ import com.colegio.colegio_api.model.Alumno;
 import com.colegio.colegio_api.repository.IAlumnoRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class AlumnoService implements IAlumnoService{
     
     private List<Alumno> listaAlumnos;
@@ -30,7 +32,7 @@ public class AlumnoService implements IAlumnoService{
     for (Alumno alumno : listaAlumnos) {
             if (alumno.getNombre().equalsIgnoreCase(nombre) &&
                 alumno.getApellido().equalsIgnoreCase(apellido)) {
-            return aluRepo.findAlumnoNombreApellido(nombre, apellido).orElse(null);
+            return aluRepo.findByNombreAndApellido(nombre, apellido).orElse(null);
             }
         }
         return null;

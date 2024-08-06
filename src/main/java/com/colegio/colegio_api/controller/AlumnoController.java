@@ -1,7 +1,6 @@
 package com.colegio.colegio_api.controller;
 
 import com.colegio.colegio_api.model.Alumno;
-import com.colegio.colegio_api.service.AlumnoService;
 import com.colegio.colegio_api.service.IAlumnoService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
