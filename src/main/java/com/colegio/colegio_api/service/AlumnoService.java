@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class AlumnoService implements IAlumnoService{
     
+    private List<Alumno> listaAlumnos;
+        
     @Autowired
     private IAlumnoRepository aluRepo;
 
@@ -15,13 +17,25 @@ public class AlumnoService implements IAlumnoService{
         List <Alumno> listaAlumnos= aluRepo.findAll();
         return listaAlumnos;    
     }
-
+    
     @Override
     public Alumno findAlumno(Long legajo) {
         Alumno alu = aluRepo.findById(legajo).orElse(null);
         return alu;    
     }
+    
 
+    @Override
+    public Alumno findAlumnoNombreApellido(String nombre, String apellido) {
+    for (Alumno alumno : listaAlumnos) {
+            if (alumno.getNombre().equalsIgnoreCase(nombre) &&
+                alumno.getApellido().equalsIgnoreCase(apellido)) {
+                return alumno;
+            }
+        }
+        return null;
+    }  
+    
     @Override
     public void saveAlumno(Alumno alu) {
         aluRepo.save(alu);    
@@ -61,5 +75,5 @@ public class AlumnoService implements IAlumnoService{
     public void editAlumno(Alumno alu) {
         this.saveAlumno(alu);
     }
-    
+
 }

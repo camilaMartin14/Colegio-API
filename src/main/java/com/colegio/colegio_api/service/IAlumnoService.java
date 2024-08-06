@@ -9,6 +9,8 @@ public interface IAlumnoService {
     
     public Alumno findAlumno(Long legajo);
     
+    public Alumno findAlumnoNombreApellido(String nombre, String apellido);
+    
     public void saveAlumno(Alumno alu);
     
     public void deleteAlumno(Long alu);
