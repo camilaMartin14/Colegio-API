@@ -6,6 +6,9 @@ import com.colegio.colegio_api.model.Maestro;
 import com.colegio.colegio_api.repository.ICursoRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -58,4 +61,8 @@ public class CursoService implements ICursoService{
         this.saveCurso(cur);
     }
     
+    public Page<Curso> getCursos(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return cursoRepo.findAll(pageable);
+    }
 }

@@ -4,6 +4,7 @@ import com.colegio.colegio_api.model.Alumno;
 import com.colegio.colegio_api.service.IAlumnoService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,10 +21,10 @@ public class AlumnoController {
     private IAlumnoService aluServ;
     
     @GetMapping ("/alumnos")
-    public List <Alumno> getAlumno(
+    public Page <Alumno> getAlumnos(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size){
-        return aluServ.getAlumno();
+        return aluServ.getAlumnos(page, size);
     }
     
     @GetMapping("/alumnos/{nombrecompleto}")
