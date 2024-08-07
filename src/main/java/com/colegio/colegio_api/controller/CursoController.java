@@ -1,7 +1,6 @@
 package com.colegio.colegio_api.controller;
 
 import com.colegio.colegio_api.model.Curso;
-import com.colegio.colegio_api.model.Maestro;
 import com.colegio.colegio_api.service.ICursoService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -36,20 +34,6 @@ public class CursoController {
         curServ.deleteCurso(id);
         
         return "El curso se borró correctamente";
-    }
-
-    @PutMapping("/cursos/editar/{id}")
-    public Curso editCurso (@PathVariable Long id,
-            @RequestParam(required = false, name= "id") Long nuevaId,
-            @RequestParam(required = false, name= "materia") String nuevaMateria,
-            @RequestParam(required = false, name= "alumnos") List nuevaListaAlumnos,
-            @RequestParam(required = false, name= "maestro") Maestro nuevoMaestro){
-            
-        curServ.editCurso(id, nuevaId, nuevaMateria, nuevaListaAlumnos, nuevoMaestro);
-        
-        Curso cur = curServ.findCurso(nuevaId);
-        
-        return cur;
     }
     
     @PutMapping("/cursos/editar")

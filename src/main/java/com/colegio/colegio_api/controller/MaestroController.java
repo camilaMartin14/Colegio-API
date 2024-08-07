@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -35,24 +34,6 @@ public class MaestroController {
         maeServ.deleteMaestro(legajo);
         
         return "El maestro se borró correctamente";
-    }
-
-    @PutMapping("/maestros/editar/{legajoOriginal}")
-    public Maestro editMaestro (@PathVariable Long legajoOriginal,
-            @RequestParam(required = false, name= "legajo_maestro") Long nuevoLegajo,
-            @RequestParam(required = false, name= "nombre") String nuevoNombre,
-            @RequestParam(required = false, name= "apellido") String nuevoApellido,
-            @RequestParam(required = false, name= "dni") int nuevoDni){
-            
-        maeServ.editMaestro(legajoOriginal, 
-                            nuevoLegajo, 
-                            nuevoNombre, 
-                            nuevoApellido, 
-                            nuevoDni);
-        
-        Maestro mae = maeServ.findMaestro(nuevoLegajo);
-        
-        return mae;
     }
     
     @PutMapping("/maestros/editar")
