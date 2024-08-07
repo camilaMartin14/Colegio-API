@@ -2,15 +2,24 @@ package com.colegio.colegio_api.service;
 
 import com.colegio.colegio_api.model.Alumno;
 import com.colegio.colegio_api.repository.IAlumnoRepository;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AlumnoService implements IAlumnoService{
     
-    private List<Alumno> listaAlumnos;
-        
+    private List<Alumno> listaAlumnos = new ArrayList<>();
+    
+    @Autowired
+    public AlumnoService(List<Alumno> listaAlumnos) {
+        this.listaAlumnos = listaAlumnos!= null ? listaAlumnos : new ArrayList<>();
+    }
+    
     @Autowired
     private IAlumnoRepository aluRepo;
 
@@ -29,10 +38,14 @@ public class AlumnoService implements IAlumnoService{
 
     @Override
     public  Alumno findAlumnoNombreApellido(String nombre, String apellido) {
-    for (Alumno alumno : listaAlumnos) {
+    
+        if (listaAlumnos == null) {
+            throw new IllegalStateException("La lista de alumnos no ha sido inicializada.");
+        }
+        for (Alumno alumno : listaAlumnos) {
             if (alumno.getNombre().equalsIgnoreCase(nombre) &&
                 alumno.getApellido().equalsIgnoreCase(apellido)) {
-            return aluRepo.findByNombreAndApellido(nombre, apellido).orElse(null);
+            return alumno;
             }
         }
         return null;
@@ -78,4 +91,8 @@ public class AlumnoService implements IAlumnoService{
         this.saveAlumno(alu);
     }
 
+    public Page<Alumno> getAllAlumnos(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return aluRepo.findAll(pageable);
+    }
 }

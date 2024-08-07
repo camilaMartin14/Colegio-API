@@ -6,6 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,9 +20,8 @@ public class Curso {
     public long id;
     public String materia;
     @OneToMany
-    public List <Alumno> listaAlumnos;
+    public List <Alumno> listaAlumnos = new ArrayList<>();;
     @OneToOne
-    //@JoinColumn(name = "un_cliente_id_cliente", referencedColumnName = "id_cliente")
     public Maestro unMaestro;
 
     public Curso() {

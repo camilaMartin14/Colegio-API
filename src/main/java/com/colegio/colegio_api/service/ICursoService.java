@@ -22,5 +22,5 @@ public interface ICursoService {
                             Maestro unMaestro);
 
     public void editCurso(Curso cur);
-
+    
 }

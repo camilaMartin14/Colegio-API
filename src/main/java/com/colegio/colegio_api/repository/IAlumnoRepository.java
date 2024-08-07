@@ -1,13 +1,10 @@
 package com.colegio.colegio_api.repository;
 
-import com.colegio.colegio_api.model.Alumno;
-import java.util.Optional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import com.colegio.colegio_api.model.Alumno;
 
-@Repository
-public interface IAlumnoRepository extends JpaRepository <Alumno, Long>{
-    
-    Optional<Alumno> findByNombreAndApellido(String nombre, String apellido);
-
+public interface IAlumnoRepository extends JpaRepository<Alumno, Long> {
+    Page<Alumno> findAll(Pageable pageable);
 }

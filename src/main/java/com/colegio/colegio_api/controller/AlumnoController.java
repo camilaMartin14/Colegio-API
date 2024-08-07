@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -19,11 +20,40 @@ public class AlumnoController {
     private IAlumnoService aluServ;
     
     @GetMapping ("/alumnos")
-    public List <Alumno> getAlumnos(){
+    public List <Alumno> getAlumno(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size){
         return aluServ.getAlumno();
     }
     
     @GetMapping("/alumnos/{nombrecompleto}")
+public ResponseEntity<Alumno> findAlumnoNombreApellido(@PathVariable String nombrecompleto) {
+    if (nombrecompleto == null || nombrecompleto.trim().isEmpty()) {
+        return ResponseEntity.badRequest().body(null);
+    }
+
+    String[] partesNombre = nombrecompleto.split(" ", 2);
+    if (partesNombre.length < 2) {
+        return ResponseEntity.badRequest().body(null);
+    }
+
+    String nombre = partesNombre[0].trim();
+    String apellido = partesNombre[1].trim();
+
+    if (nombre.isEmpty() || apellido.isEmpty()) {
+        return ResponseEntity.badRequest().body(null);
+    }
+
+    Alumno alumno = aluServ.findAlumnoNombreApellido(nombre, apellido);
+    if (alumno != null) {
+        return ResponseEntity.ok(alumno);
+    } else {
+        return ResponseEntity.notFound().build();
+    }
+}
+
+    
+    /*@GetMapping("/alumnos/{nombrecompleto}")
     public ResponseEntity<Alumno> findAlumnoNombreApellido(@PathVariable String nombrecompleto) {
         String[] partesNombre = nombrecompleto.split(" ", 2);
         if (partesNombre.length < 2) {
@@ -39,7 +69,7 @@ public class AlumnoController {
         } else {
             return ResponseEntity.notFound().build();
         }
-    }
+    }*/
 
     
     @PostMapping ("/alumnos/crear")

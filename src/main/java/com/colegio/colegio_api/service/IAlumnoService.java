@@ -2,6 +2,7 @@ package com.colegio.colegio_api.service;
 
 import com.colegio.colegio_api.model.Alumno;
 import java.util.List;
+import org.hibernate.query.Page;
 
 public interface IAlumnoService {
     
