@@ -16,7 +16,7 @@ public class AlumnoService implements IAlumnoService{
     private List<Alumno> listaAlumnos = new ArrayList<>();
     
     @Autowired
-    public AlumnoService(Page<Alumno> listaAlumnos) {
+    public AlumnoService(List<Alumno> listaAlumnos) {
         this.listaAlumnos = listaAlumnos!= null ? listaAlumnos : new ArrayList<>();
     }
     

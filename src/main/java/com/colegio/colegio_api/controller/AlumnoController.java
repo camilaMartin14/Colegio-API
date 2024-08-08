@@ -4,7 +4,6 @@ import com.colegio.colegio_api.model.Alumno;
 import com.colegio.colegio_api.service.IAlumnoService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,10 +20,10 @@ public class AlumnoController {
     private IAlumnoService aluServ;
     
     @GetMapping ("/alumnos")
-    public Page <Alumno> getAlumnos(
+    public List <Alumno> getAlumno(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size){
-        return aluServ.getAlumnos(page, size);
+        return aluServ.getAlumno();
     }
     
     @GetMapping("/alumnos/{nombrecompleto}")
@@ -46,12 +45,12 @@ public ResponseEntity<Alumno> findAlumnoNombreApellido(@PathVariable String nomb
     }
 
     Alumno alumno = aluServ.findAlumnoNombreApellido(nombre, apellido);
-    if (alumno != null) {
-        return ResponseEntity.ok(alumno);
-    } else {
-        return ResponseEntity.notFound().build();
+        if (alumno != null) {
+            return ResponseEntity.ok(alumno);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
-}
 
     
     /*@GetMapping("/alumnos/{nombrecompleto}")
