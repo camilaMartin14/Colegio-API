@@ -30,6 +30,11 @@ public class AlumnoService implements IAlumnoService{
     }
     
     @Override
+    public List<Alumno> buscarPorNombre(String nombre) {
+        return aluRepo.findByNombre(nombre);
+    }
+    
+    @Override
     public Alumno findAlumno(Long legajo) {
         Alumno alu = aluRepo.findById(legajo).orElse(null);
         return alu;    
@@ -95,4 +100,6 @@ public class AlumnoService implements IAlumnoService{
         Pageable pageable = PageRequest.of(page, size);
         return aluRepo.findAll(pageable);
     }
+
+
 }

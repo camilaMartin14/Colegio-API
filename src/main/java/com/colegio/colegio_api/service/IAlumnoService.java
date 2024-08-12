@@ -7,6 +7,8 @@ public interface IAlumnoService {
     
     public List <Alumno> getAlumno();
     
+    public List <Alumno> buscarPorNombre(String nombre);
+    
     public Alumno findAlumno(Long legajo);
     
     public Alumno findAlumnoNombreApellido(String nombre, String apellido);
