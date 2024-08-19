@@ -6,38 +6,22 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class AlumnoController {
-     @Autowired
+    @Autowired
     private IAlumnoService aluServ;
     
-    @GetMapping ("/alumnos")
-    public List <Alumno> getAlumno(
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size){
-        return aluServ.getAlumno();
+    
+    @GetMapping ("/alumnos/{nombre}")
+    public List <Alumno> getAlumno(@PathVariable String nombre){
+        return aluServ.getAlumno(nombre);
     }
-
-    @GetMapping("/nombresfiltro")
-    public String alumnosFiltrados(Model model) {
-        model.addAttribute("alumno", new Alumno());
-        return "nombresfiltro";
-    }
-
-    @GetMapping("/nombre")
-    public String buscarPorNombre(@RequestParam String nombre, Model model) {
-        model.addAttribute("alumnosPorNombre", aluServ.buscarPorNombre(nombre));
-        return "nombresfiltro";
-    }
-
     
     @PostMapping ("/alumnos/crear")
     public String saveAlumno(@RequestBody Alumno alu){
