@@ -56,4 +56,9 @@ public class MaestroService implements IMaestroService{
         this.saveMaestro(maes);    
     }
     
+    @Override
+    public List<Maestro> findMaestroFiltrado(long legajo, String nombre, String apellido, int dni) {
+        Maestro specification = new Maestro (legajo, nombre, apellido, dni);
+        return maeRepo.findAll(specification);
+    }
 }

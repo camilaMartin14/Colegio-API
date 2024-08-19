@@ -7,6 +7,8 @@ public interface IMaestroService {
     
     public List <Maestro> getMaestro();
     
+    public List<Maestro> findMaestroFiltrado(long legajo, String nombre, String apellido, int dni);
+
     public Maestro findMaestro(Long legajo);
     
     public void saveMaestro(Maestro maes);
