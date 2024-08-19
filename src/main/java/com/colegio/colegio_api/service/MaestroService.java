@@ -39,7 +39,7 @@ public class MaestroService implements IMaestroService{
                             Long nuevoLegajo, 
                             String nuevoNombre, 
                             String nuevoApellido, 
-                            int nuevoDni) {
+                            String nuevoDni) {
         
         Maestro mae = this.findMaestro(legajoOriginal);
 
@@ -57,7 +57,7 @@ public class MaestroService implements IMaestroService{
     }
     
     @Override
-    public List<Maestro> findMaestroFiltrado(long legajo, String nombre, String apellido, int dni) {
+    public List<Maestro> findMaestroFiltrado(long legajo, String nombre, String apellido, String dni) {
         Maestro specification = new Maestro (legajo, nombre, apellido, dni);
         return maeRepo.findAll(specification);
     }

@@ -7,7 +7,7 @@ public interface IMaestroService {
     
     public List <Maestro> getMaestro();
     
-    public List<Maestro> findMaestroFiltrado(long legajo, String nombre, String apellido, int dni);
+    public List<Maestro> findMaestroFiltrado(long legajo, String nombre, String apellido, String dni);
 
     public Maestro findMaestro(Long legajo);
     
@@ -19,7 +19,7 @@ public interface IMaestroService {
                             Long nuevoLegajo,
                             String nuevoNombre,
                             String nuevoApellido,
-                            int nuevoDni);
+                            String nuevoDni);
 
     public void editMaestro(Maestro maes);
 }

@@ -23,12 +23,12 @@ public class Maestro implements Specification <Maestro>{
     public long legajo;
     public String nombre;
     public String apellido;
-    public int dni;
+    public String dni;
 
     public Maestro() {
     }
 
-    public Maestro(long legajo, String nombre, String apellido, int dni) {
+    public Maestro(long legajo, String nombre, String apellido, String dni) {
         this.legajo = legajo;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -47,7 +47,13 @@ public class Maestro implements Specification <Maestro>{
             predicates.add(cb.equal(root.get("apellido"), apellido));
         }
 
-
+        if (dni != null) {
+            predicates.add(cb.equal(root.get("dni"), dni));
+        }
+        
+        if (legajo == 0) {
+            predicates.add(cb.equal(root.get("legajo"), legajo));
+        }
         return cb.and(predicates.toArray(new Predicate[predicates.size()]));
     }
     
